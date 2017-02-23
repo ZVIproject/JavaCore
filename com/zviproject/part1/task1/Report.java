@@ -1,7 +1,5 @@
 package com.zviproject.part1.task1;
 
-import java.util.Scanner;
-
 public class Report {
 	private int numberOfGroup;
 	private int numberOfReportBook;
@@ -48,18 +46,6 @@ public class Report {
 
 	public void setMaks(int[] maks) {
 		this.maks = maks;
-	}
-
-	public int[] addMarks() {
-		Scanner scan = new Scanner(System.in);
-		int arr[] = new int[4];
-
-		for (int i = 0; i < 4; i++) {
-			System.out.println("Input mark");
-			scan.nextInt();
-		}
-		scan.close();
-		return arr;dsd
 	}
 
 }
