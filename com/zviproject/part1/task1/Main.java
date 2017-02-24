@@ -42,8 +42,9 @@ public class Main {
 				reports.add(rep);
 			}
 
+			System.out.println("\nStudents: ");
 			for (Report show : reports) {
-				System.out.println(show.getSurnameOfStudent());
+				System.out.println("Name: " + show.getSurnameOfStudent());
 			}
 
 			break;
@@ -60,7 +61,6 @@ public class Main {
 			System.out.println("Input mark");
 			arr[i] = scan.nextInt();
 		}
-		scan.close();
 		return arr;
 	}
 
