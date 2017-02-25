@@ -22,24 +22,29 @@ public class Part2 {
 
 	public void commonMyltiple() {
 		Scanner input = new Scanner(System.in);
-		System.out.print("Input data:  ");
-		int firstNumber = input.nextInt();
-		int secondNumber = input.nextInt();
+		try {
 
-		while ((firstNumber != 0) && (secondNumber != 0)) {
-			if (firstNumber > secondNumber) {
-				firstNumber %= secondNumber;
-			} else {
-				secondNumber %= firstNumber;
+			System.out.print("Input data:  ");
+			int firstNumber = input.nextInt();
+			int secondNumber = input.nextInt();
+
+			while ((firstNumber != 0) && (secondNumber != 0)) {
+				if (firstNumber > secondNumber) {
+					firstNumber %= secondNumber;
+				} else {
+					secondNumber %= firstNumber;
+				}
 			}
+			System.out.println(firstNumber + secondNumber);
+		} catch (NumberFormatException e) {
+			System.out.println("ERROR");
+			commonMyltiple();
 		}
-		System.out.println(firstNumber + secondNumber);
 	}
 
 	public void searchX() {
 		Scanner scan = new Scanner(System.in);
 		try {
-			double nunberOfX;
 
 			System.out.print("\n Input a : ");
 			double numberOfA = scan.nextDouble();
@@ -66,26 +71,29 @@ public class Part2 {
 	public void workingWithArray() throws IOException {
 		int arr[][] = new int[5][5];
 
-		Scanner keybord = new Scanner(System.in);
-		System.out.println("1 - random\n2 - from file");
-		int value = keybord.nextInt();
+		try (Scanner keybord = new Scanner(System.in)) {
+			System.out.println("1 - random\n2 - from file");
+			int value = keybord.nextInt();
 
-		switch (value) {
-		case 1:
-			randomData(arr);
-			break;
+			switch (value) {
+			case 1:
+				randomData(arr);
+				break;
 
-		case 2:
-			fromFile(arr);
-			break;
+			case 2:
+				fromFile(arr);
+				break;
 
-		default: {
+			default: {
 
-			System.out.println("error");
-			workingWithArray();
+				System.out.println("error");
+				workingWithArray();
 
-			break;
-		}
+				break;
+			}
+			}
+
+		} catch (Exception e) {
 
 		}
 
