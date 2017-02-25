@@ -2,12 +2,19 @@ package com.zviproject.part1.task1;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
+
+import com.zviproject.part1.task1.entity.Report;
+import com.zviproject.part1.task1.service.Part2;
+import com.zviproject.part1.task1.service.ReportService;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
 		Scanner inputData = new Scanner(System.in);
+		final String PATH = "/home/zviproject/Стільниця/Reports.txt";
 		Part2 tasks = new Part2();
 		System.out.println("Change part \n" + "Part 1 - 1\n" + "Part 2 - 2\n" + "Part 3 - 3\n" + "Part 4 - 4");
 		int part = inputData.nextInt();
@@ -23,6 +30,7 @@ public class Main {
 
 		case 2: {
 			ArrayList<Report> reports = new ArrayList<>();
+			ReportService reportService = new ReportService();
 
 			System.out.print("Number of students : ");
 			int numberOfStudents = inputData.nextInt();
@@ -38,10 +46,21 @@ public class Main {
 				System.out.print("\nReport book : ");
 				int reportBook = inputData.nextInt();
 
-				Report rep = new Report(numberOfGroup, reportBook, name, addMarks());
+				Report rep = new Report(numberOfGroup, reportBook, name, new ReportService().addMarks());
+
 				reports.add(rep);
+
 			}
 
+			Collections.sort(reports, new Comparator<Report>() {
+				public int compare(Report r1, Report r2) {
+					return r1.toString().compareTo(r2.toString());
+				}
+			});
+
+			reportService.saveToFile(reports, PATH);
+
+			reportService.readFromFile(PATH);
 			System.out.println("\nStudents: ");
 			for (Report show : reports) {
 				System.out.println("Name: " + show.getSurnameOfStudent());
@@ -51,17 +70,6 @@ public class Main {
 		}
 		}
 
-	}
-
-	public static int[] addMarks() {
-		Scanner scan = new Scanner(System.in);
-		int arr[] = new int[4];
-
-		for (int i = 0; i < 4; i++) {
-			System.out.println("Input mark");
-			arr[i] = scan.nextInt();
-		}
-		return arr;
 	}
 
 }

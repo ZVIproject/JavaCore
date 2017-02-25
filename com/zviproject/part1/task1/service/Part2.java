@@ -1,4 +1,4 @@
-package com.zviproject.part1.task1;
+package com.zviproject.part1.task1.service;
 
 import java.io.File;
 import java.io.IOException;

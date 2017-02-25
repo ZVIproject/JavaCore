@@ -1,10 +1,17 @@
-package com.zviproject.part1.task1;
+package com.zviproject.part1.task1.entity;
 
-public class Report {
+import java.io.Serializable;
+
+public class Report implements Serializable {
+	/**
+	 * Needed for working with file
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int numberOfGroup;
 	private int numberOfReportBook;
 	private String surnameOfStudent;
-	private int maks[] = new int[4];
+	private int marks[] = new int[4];
 
 	public Report() {
 	}
@@ -13,7 +20,7 @@ public class Report {
 		this.numberOfGroup = numberOfGroup;
 		this.numberOfReportBook = numberOfReportBook;
 		this.surnameOfStudent = surnameOfStudent;
-		this.maks = maks;
+		this.marks = maks;
 	}
 
 	public int getNumberOfGroup() {
@@ -40,12 +47,12 @@ public class Report {
 		this.surnameOfStudent = surnameOfStudent;
 	}
 
-	public int[] getMaks() {
-		return maks;
+	public int[] getMarks() {
+		return marks;
 	}
 
-	public void setMaks(int[] maks) {
-		this.maks = maks;
+	public void setMarks(int[] maks) {
+		this.marks = maks;
 	}
 
 }
