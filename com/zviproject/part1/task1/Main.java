@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.zviproject.part1.task1.entity.Report;
@@ -17,57 +18,62 @@ public class Main {
 		final String PATH = "/home/zviproject/Стільниця/Reports.txt";
 		Part2 tasks = new Part2();
 		System.out.println("Change part \n" + "Part 1 - 1\n" + "Part 2 - 2\n" + "Part 3 - 3\n" + "Part 4 - 4");
-		int part = inputData.nextInt();
 
-		switch (part) {
-		case 1: {
-			tasks.commonMyltiple();
-			tasks.resultOfRandom();
-			tasks.searchX();
-			tasks.workingWithArray();
-			break;
-		}
+		try {
+			int part = inputData.nextInt();
 
-		case 2: {
-			ArrayList<Report> reports = new ArrayList<>();
-			ReportService reportService = new ReportService();
-
-			System.out.print("Number of students : ");
-			int numberOfStudents = inputData.nextInt();
-
-			for (int i = 0; i < numberOfStudents; i++) {
-
-				System.out.println("\nName : ");
-				String name = inputData.next();
-
-				System.out.print("\nGroup : ");
-				int numberOfGroup = inputData.nextInt();
-
-				System.out.print("\nReport book : ");
-				int reportBook = inputData.nextInt();
-
-				Report rep = new Report(numberOfGroup, reportBook, name, new ReportService().addMarks());
-
-				reports.add(rep);
-
+			switch (part) {
+			case 1: {
+				tasks.commonMyltiple();
+				tasks.resultOfRandom();
+				tasks.searchX();
+				tasks.workingWithArray();
+				break;
 			}
 
-			Collections.sort(reports, new Comparator<Report>() {
-				public int compare(Report r1, Report r2) {
-					return r1.toString().compareTo(r2.toString());
+			case 2: {
+				ArrayList<Report> reports = new ArrayList<>();
+				ReportService reportService = new ReportService();
+
+				System.out.print("Number of students : ");
+				int numberOfStudents = inputData.nextInt();
+
+				for (int i = 0; i < numberOfStudents; i++) {
+
+					System.out.println("\nName : ");
+					String name = inputData.next();
+
+					System.out.print("\nGroup : ");
+					int numberOfGroup = inputData.nextInt();
+
+					System.out.print("\nReport book : ");
+					int reportBook = inputData.nextInt();
+
+					Report rep = new Report(numberOfGroup, reportBook, name, new ReportService().addMarks());
+
+					reports.add(rep);
+
 				}
-			});
 
-			reportService.saveToFile(reports, PATH);
+				Collections.sort(reports, new Comparator<Report>() {
+					public int compare(Report r1, Report r2) {
+						return r1.toString().compareTo(r2.toString());
+					}
+				});
 
-			reportService.readFromFile(PATH);
-			System.out.println("\nStudents: ");
-			for (Report show : reports) {
-				System.out.println("Name: " + show.getSurnameOfStudent());
+				reportService.saveToFile(reports, PATH);
+
+				reportService.readFromFile(PATH);
+				System.out.println("\nStudents: ");
+				for (Report show : reports) {
+					System.out.println("Name: " + show.getSurnameOfStudent());
+				}
+
+				break;
 			}
-
-			break;
-		}
+			}
+		} catch (NumberFormatException | InputMismatchException e) {
+			System.out.println("ERROR");
 		}
 
 	}
